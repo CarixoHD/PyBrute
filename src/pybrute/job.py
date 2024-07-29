@@ -1,5 +1,6 @@
 from .scripts.fetch_report import fetch_report
 
+
 async def job(session_manager, dir, stop_event, counter, retries):
     if stop_event.is_set():
         return None

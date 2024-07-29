@@ -8,6 +8,7 @@ from pybrute.config import (
     MAX_REQUESTS_PER_SESSION,
     WORDLIST,
     MAX_RETRIES,
+    RESULTS,
 )
 from pybrute.session_manager import SessionManager
 from pybrute.utils import load_wordlist_to_queue, read_wordlist
@@ -62,6 +63,8 @@ async def run_bruteforce(session_manager, wordlist_queue, total_wordlist):
     await brute.start()
     await brute.stop()
     print(f"[+] Total number of entries checked: {counter.counter}")
+    if len(RESULTS) != 0:
+        print(*set(RESULTS), sep="\n")
 
 
 async def main():

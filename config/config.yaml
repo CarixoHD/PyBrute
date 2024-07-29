@@ -1,7 +1,7 @@
 session:
   size: 1000
-  timeout: 5
-  concurrency_limit: 3000
+  timeout: 10
+  concurrency_limit: 5000
 
 workers:
   num_workers: 200
@@ -9,7 +9,7 @@ workers:
 
 retry:
   max_retries: 3
-  max_requests_per_session: 1
+  max_requests_per_session: 100
 
 paths:
   wordlist: "../wordlists/dirs.txt"
@@ -35,3 +35,5 @@ session_init:
 
   session_data: | 
     -----------------------------34758347703837855594647838481\r\nContent-Disposition: form-data; name="sql"\r\n\r\n\r\n-----------------------------34758347703837855594647838481--\r\n
+
+  url: "https://url.url"

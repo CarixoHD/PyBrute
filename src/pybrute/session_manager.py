@@ -1,7 +1,6 @@
 import aiohttp
 import asyncio
-from .config import SESSION_COOKIES, SESSION_DATA, SESSION_HEADER
-from .utils import gen_url
+from .config import SESSION_COOKIES, SESSION_DATA, SESSION_HEADER, URL
 import tqdm
 
 
@@ -48,7 +47,7 @@ class SessionManager:
         )
         try:
             async with session.get(
-                gen_url(),
+                url=URL,
                 headers=SESSION_HEADER,
                 data=SESSION_DATA,
                 allow_redirects=False,
@@ -71,4 +70,4 @@ class SessionManager:
         if session._request_count >= self.max_requests_per_session:
             await session.close()
             session = await self.create_session()
-        await self.sessions.put(session)
+        self.sessions.put_nowait(session)
