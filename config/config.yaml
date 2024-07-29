@@ -1,10 +1,10 @@
 session:
-  size: 100
-  timeout: 3
-  concurrency_limit: 1000
+  size: 1000
+  timeout: 5
+  concurrency_limit: 3000
 
 workers:
-  num_workers: 50
+  num_workers: 200
   batch_size: 100
 
 retry:
@@ -12,7 +12,7 @@ retry:
   max_requests_per_session: 1
 
 paths:
-  wordlist: "/path/to/wordlist"
+  wordlist: "../wordlists/dirs.txt"
 
 
 session_init:

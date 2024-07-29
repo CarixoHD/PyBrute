@@ -12,7 +12,7 @@ from pybrute.config import (
 from pybrute.session_manager import SessionManager
 from pybrute.utils import load_wordlist_to_queue, read_wordlist
 from pybrute.counter import Counter
-from pybrute.jobs.job import job
+from pybrute.job import job
 from pybrute.conc import ConcurrencyManager
 from pybrute.bruteforcer import Bruteforcer
 
