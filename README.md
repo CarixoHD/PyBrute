@@ -14,7 +14,7 @@ PyBrute is a flexible and not so shitty bruteforce framework written in Python. 
 
 1. Clone the repo:
     ```bash
-    git clone https://github.com/CarixoHD/pybrute.git
+    git clone https://github.com/CarixoHD/PyBrute.git
     ```
 2. Navigate to the project directory:
     ```bash
