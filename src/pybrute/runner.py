@@ -15,12 +15,17 @@ from .config import (
     SESSION_SIZE,
 )
 
+
 class Runner:
     def __init__(self, user_func, *args, **kwargs):
         self.user_func = user_func
-        self.args = args 
+        self.args = args
         self.kwargs = kwargs
-        self.session_manager = SessionManager(max_requests_per_session=MAX_REQUESTS_PER_SESSION, timeout=SESSION_TIMEOUT, size=SESSION_SIZE)
+        self.session_manager = SessionManager(
+            max_requests_per_session=MAX_REQUESTS_PER_SESSION,
+            timeout=SESSION_TIMEOUT,
+            size=SESSION_SIZE,
+        )
         self.wordlist_queue = asyncio.Queue()
         self.stop_event = asyncio.Event()
         self.conc_manager = ConcurrencyManager(CONCURRENCY_LIMIT)
@@ -63,10 +68,12 @@ class Runner:
                 if stop_event.is_set():
                     return False
                 try:
-                    result = await self.user_func(session, entry, *self.args, **self.kwargs)
+                    result = await self.user_func(
+                        session, entry, *self.args, **self.kwargs
+                    )
                     await counter.increment()
                     return result
-                
+
                 except Exception:
                     attempt += 1
                     if attempt >= retries:

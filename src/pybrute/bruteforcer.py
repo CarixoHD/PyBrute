@@ -1,6 +1,7 @@
 import asyncio
 from .worker import Worker
 
+
 class Bruteforcer:
     def __init__(
         self,
@@ -40,7 +41,9 @@ class Bruteforcer:
         self.worker_tasks = []
 
     async def start(self):
-        self.worker_tasks = [asyncio.create_task(worker.run()) for worker in self.workers]
+        self.worker_tasks = [
+            asyncio.create_task(worker.run()) for worker in self.workers
+        ]
         try:
             await asyncio.gather(*self.worker_tasks)
         except asyncio.CancelledError:

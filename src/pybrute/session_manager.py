@@ -3,6 +3,7 @@ import asyncio
 from .config import SESSION_COOKIES
 import tqdm
 
+
 class ClientSessionWrapper(aiohttp.ClientSession):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -11,6 +12,7 @@ class ClientSessionWrapper(aiohttp.ClientSession):
     async def _request(self, method, url, **kwargs):
         self._request_count += 1
         return await super()._request(method, url, **kwargs)
+
 
 class SessionManager:
     def __init__(self, *, size, max_requests_per_session, timeout):

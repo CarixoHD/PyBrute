@@ -4,6 +4,8 @@ import asyncio
 
 
 result = []
+
+
 async def main(session, password, results):
     password = password.strip()
     if not password:
@@ -20,6 +22,7 @@ async def main(session, password, results):
             return True
 
     return None
+
 
 run = Runner(main, result)
 asyncio.run(run.run())

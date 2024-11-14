@@ -1,5 +1,6 @@
 import asyncio
 
+
 class Counter:
     def __init__(self, conc_manager):
         self.fails = 0
@@ -27,9 +28,9 @@ class Counter:
         if total > 1:
             success_rate = (self.success / total) * 100
             if success_rate > 60:
-                await self.conc_manager.adjust(10)  
+                await self.conc_manager.adjust(10)
             elif success_rate < 60:
-                await self.conc_manager.adjust(-10) 
+                await self.conc_manager.adjust(-10)
             self.reset()
 
     def reset(self):
