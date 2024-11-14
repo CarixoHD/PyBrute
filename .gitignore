@@ -4,3 +4,4 @@ backups/
 wordlists/
 scripts/
 !src/pybrute/scripts/fetch_report.py
+.venv/

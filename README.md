@@ -29,55 +29,44 @@ PyBrute is a flexible and not so shitty bruteforce framework written in Python. 
 
 ### Writing a Custom Bruteforce Script
 
-Create your custom bruteforce script in the `scripts/` folder. For example, `fetch_report.py`:
+Create your own function :
 
 ```python
-import aiohttp
-from ..config import RESULTS, URL
+from pybrute.runner import Runner
+from pybrute.config import URL
+import asyncio
 
-async def fetch_report(session, dir):
-    if "." in dir:
-        dir = dir.split(".")[0]
-    url = f"{URL}/{dir}/get-reports"
-    async with session.get(url, allow_redirects=False) as response:
-        response_text = await response.text()
-        if "was not found" not in response_text:
-            RESULTS.append(dir)
+result = []
+async def main(session, password, results):
+    password = password.strip()
+    if not password:
+        return None
+    url = f"{URL}/index.php"
+    form_data = {"name": "admin", "pwd": password}
+
+    async with session.post(url, data=form_data, ssl=False) as response:
+        resp = await response.text()
+        if "Username or password is incorrect" not in resp:
+            print(f"[+] Found password: {password}")
+            # if you want to stop the script after finding one password, return True
+            results.append(password)
+            return True
+
     return None
+
+run = Runner(main, result)
+asyncio.run(run.run())
+
+print(result)
+
 ```
 **Note:** If you want the bruteforce to stop after one match, return `True`. If you want to find all the matches, return `None`.
-
-### Integrating the Custom Script
-
-Edit `job.py` to import and use your custom function:
-
-```python
-# import the function
-from .scripts.fetch_report import fetch_report
-
-async def job(session_manager, dir, stop_event, counter, retries):
-    if stop_event.is_set():
-        return None
-
-    attempt = 0
-    session = await session_manager.get_session()
-
-    while attempt < retries:
-        try:
-            # run the function
-            result = await fetch_report(session, dir)
-            await session_manager.release_session(session)
-            await counter.increment()
-            return result
-
-        except Exception:
-            attempt += 1
-            if attempt == retries:
-                await session_manager.release_session(session)
-                return False
-```
 
 ### Configuring the Bruteforcer
 
 Adjust the settings in `config.yaml`. This is also where you specify the wordlist you want to use, the url, the session and worker parameters, as well as headers, cookies, and payloads being used in the initial session setup.
+
+
+
+README written by ChatGPT <3
 

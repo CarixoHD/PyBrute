@@ -40,5 +40,3 @@ SESSION_HEADER = config.get("session_init.session_headers")
 SESSION_DATA = config.get("session_init.session_data")
 
 URL = config.get("session_init.url")
-
-RESULTS = []

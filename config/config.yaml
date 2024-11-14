@@ -1,39 +1,18 @@
 session:
-  size: 1000
+  size: 10
   timeout: 10
-  concurrency_limit: 5000
+  concurrency_limit: 100
 
 workers:
-  num_workers: 200
-  batch_size: 100
+  num_workers: 1
+  batch_size: 10
 
 retry:
-  max_retries: 3
-  max_requests_per_session: 100
+  max_retries: 1
+  max_requests_per_session: 1
 
 paths:
-  wordlist: "../wordlists/dirs.txt"
-
+  wordlist: "../wordlists/names.txt"
 
 session_init:
-  session_cookies:
-    timezone: "2"
-    __Secure-timezone: "2"
-
-  session_headers:
-    User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"
-    Accept: "application/json"
-    Accept-Language: "nb-NO,nb;q=0.9,no-NO;q=0.8,no;q=0.6,nn-NO;q=0.5,nn;q=0.4,en-US;q=0.3,en;q=0.1"
-    Accept-Encoding: "gzip, deflate, br"
-    Content-Type: "multipart/form-data; boundary=---------------------------34758347703837855594647838481"
-    Sec-Fetch-Dest: "empty"
-    Sec-Fetch-Mode: "cors"
-    Sec-Fetch-Site: "same-origin"
-    Priority: "u=0"
-    Te: "trailers"
-    Connection: "keep-alive"
-
-  session_data: | 
-    -----------------------------34758347703837855594647838481\r\nContent-Disposition: form-data; name="sql"\r\n\r\n\r\n-----------------------------34758347703837855594647838481--\r\n
-
-  url: "https://url.url"
+  url: "http://3cpo.hackingarena.com:801/"
